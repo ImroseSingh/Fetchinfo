@@ -5,4 +5,4 @@ install:
  - pip install requests
 
 script:
- - python -m unittest Getinfo
+ - python -m unittest hw04
