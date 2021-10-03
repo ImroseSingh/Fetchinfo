@@ -16,13 +16,7 @@ class TestGitHubAPI(unittest.TestCase):
                          'Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'])
 
 
-    def test_run_status_ok(self):
-        gh = GitHubAPI("ImroseSingh")
-        self.assertEqual(gh.run(), 200, "Run status should be ok")
-
-    def test_nonuser(self):
-        gh1 = GitHubAPI("im0")
-        self.assertEqual(gh1.run(), 404, "This user is not on GitHub")
+  
 
 
 if __name__ == "__main__":
