@@ -34,20 +34,8 @@ class GitHubAPI:
         for repo in self.repos:
             print(f'Repo: {repo} Number of commits: {self.commits[repo]}')
 
-    def run(self):
-        self.get_repos()
-        if self.repo_status != 200:
-            print(f'{self.repo_status} Error getting repos')
-            return self.repo_status
-
-        self.get_commits()
-        if self.commit_status != 200:
-            print(f'{self.commit_status} Error getting commits')
-            return self.repo_status
-
-        self.print_data()
-        return 200
+   
 
 if __name__ == "__main__":
     githubapi = GitHubAPI("ImroseSingh")
-    githubapi.run()
+   
