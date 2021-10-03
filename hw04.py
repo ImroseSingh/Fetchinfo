@@ -11,7 +11,7 @@ class TestGitHubAPI(unittest.TestCase):
                          "There are 4 repositores")
 
     def test_Getrepo(self):
-        gh = GitHubAPI("Liam-Brew")
+        gh = GitHubAPI("ImroseSingh")
         self.assertEqual(gh.get_repos(), ['ssw-567','triangle-HW2','Fetchinfo','ImroseSingh'], [
                          'ssw-567','triangle-HW2','Fetchinfo','ImroseSingh'])
 
