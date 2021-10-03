@@ -12,8 +12,8 @@ class TestGitHubAPI(unittest.TestCase):
 
     def test_Getrepo(self):
         gh = GitHubAPI("ImroseSingh")
-        self.assertEqual(gh.get_repos(), ['ssw-567','triangle-HW2','Fetchinfo','ImroseSingh'], [
-                         'ssw-567','triangle-HW2','Fetchinfo','ImroseSingh'])
+        self.assertEqual(gh.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
+                         'Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'])
 
 
     def test_run_status_ok(self):
