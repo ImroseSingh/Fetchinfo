@@ -10,7 +10,7 @@ class GitHubAPI:
         user.repos = []
         user.commits = {}
 
-    def get_repos(self):
+    def get_repos(user):
         try:
             r = requests.get(f'https://api.github.com/users/{user.id}/repos')
             
@@ -27,7 +27,7 @@ class GitHubAPI:
             except requests.exceptions.HTTPError as error:
                 return
             user.commits[repo] = len(r.json())
-        return self.commits
+        return user.commits
 
     def print_data(user):
         for repo in user.repos:
