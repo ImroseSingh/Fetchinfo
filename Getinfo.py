@@ -49,5 +49,5 @@ class GitHubAPI:
         return 200
 
 if __name__ == "__main__":
-    githubapi = GitHubAPI("Liam-Brew")
+    githubapi = GitHubAPI("ImroseSingh")
     githubapi.run()
