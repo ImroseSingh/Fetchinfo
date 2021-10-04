@@ -4,4 +4,4 @@
 This home work was to write a code with external -based APIs 
 During building this code  to retreive a user's repositories and to check the number of reposities of a user 
 
-In this Home work i designed 
+In this i designed two test cases to chexk if the code is working properly in which it test the 
