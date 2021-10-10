@@ -1,6 +1,7 @@
 import unittest
 import sys
-import unittest.mock import Mock, patch
+import unittest.mock 
+import Mock, patch
 
 from Getinfo import GitHubAPI
 
