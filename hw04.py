@@ -14,12 +14,11 @@ class TestGitHubAPI(unittest.TestCase):
                          "There are 4 repositores")
     @patch("get_repo.connect")
     def testConnection(self, mock_connect):
-        mock_connect.return_value = [200, {"CS-523-Web-Programming-1": "1",
-                                     "CS555---GEDCOM-Project": "13",
-                                     "GitHubAPI567": "12",
-                                     "HelloWorldRepo": "3",
-                                     "Triangle567": "8"}]
-        self.assertTrue(get_repo.connect("cmontero201")[0])
+        mock_connect.return_value = [200, {"Fetchinfo": "1",
+                                     "ImroseSingh": "13",
+                                     "ssw-567": "12",
+                                     "triangle-HW2": "8"}]
+        self.assertTrue(get_repo.connect("ImroseSingh")[0])
     
 
 
