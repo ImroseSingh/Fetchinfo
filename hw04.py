@@ -7,14 +7,14 @@ from Getinfo import GitHubAPI
 
 class TestGitHubAPI(unittest.TestCase):
 
-    def test_myrepo(self):
+    def test_myrepo(requests_mock):
         fi = GitHubAPI("ImroseSingh")
         self.assertEqual(len(fi.get_repos()), 4,
                          "There are 4 repositores")
 
-    def test_Getrepo(self):
+    def test_Getrepo(requests_mock):
         fi = GitHubAPI("ImroseSingh")
-        self.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
+        requests_mock.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
                          'Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'])
 
 
