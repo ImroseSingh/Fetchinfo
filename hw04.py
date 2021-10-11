@@ -1,6 +1,5 @@
 import unittest
 import json
-import get_repo
 from unittest.mock import MagicMock as Mock
 from unittest.mock import patch
 
@@ -13,12 +12,9 @@ class TestGitHubAPI(unittest.TestCase):
         self.assertEqual(len(fi.get_repos()), 4,
                          "There are 4 repositores")
     @patch("get_repo.connect")
-    def testConnection(self, mock_connect):
-        mock_connect.return_value = [200, {"Fetchinfo": "1",
-                                     "ImroseSingh": "13",
-                                     "ssw-567": "12",
-                                     "triangle-HW2": "8"}]
-        self.assertTrue(get_repo.connect("ImroseSingh")[0])
+    fi = GitHubAPI("ImroseSingh")
+        self.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
+                         'Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'])
     
 
 
