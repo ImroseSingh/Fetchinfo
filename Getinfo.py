@@ -3,14 +3,14 @@ import json
 
 class GitHubAPI:
     
-    
+    def __init__(user, id):
+        user.id = id      
         
 
-        
-        
+        user.repos = []
+        user.commits = {}
 
     def get_repos(user):
-        user.repos = []
         try:
             r = requests.get(f'https://api.github.com/users/{user.id}/repos')
             
@@ -21,7 +21,6 @@ class GitHubAPI:
         return user.repos
 
     def get_commits(user):
-        user.commits = {}
         for repo in user.repos:
             try:
                 r = requests.get(f'https://api.github.com/repos/{user.id}/{repo}/commits')
@@ -38,4 +37,3 @@ class GitHubAPI:
 
 if __name__ == "__main__":
     githubapi = GitHubAPI("ImroseSingh")
-   
