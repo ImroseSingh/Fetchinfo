@@ -9,7 +9,7 @@ class TestGitHubAPI(unittest.TestCase):
 
     def test_myrepo(requests_mock):
         fi = GitHubAPI("ImroseSingh")
-        self.assertEqual(len(fi.get_repos()), 4,
+        requests_mock.assertEqual(len(fi.get_repos()), 4,
                          "There are 4 repositores")
 
     def test_Getrepo(requests_mock):
