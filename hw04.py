@@ -8,12 +8,12 @@ from Getinfo import GitHubAPI
 
 class TestGitHubAPI(unittest.TestCase):
     
-    
+    @patch("hw04.connect")
     def test_myrepo(self):
         fi = GitHubAPI("ImroseSingh")
         self.assertEqual(len(fi.get_repos()), 4,
                          "There are 4 repositores")
-
+    @patch("hw04.connect")
     def test_Getrepo(self):
         fi = GitHubAPI("ImroseSingh")
         self.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
