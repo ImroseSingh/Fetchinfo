@@ -9,7 +9,7 @@ from Getinfo import GitHubAPI
 class TestGitHubAPI(unittest.TestCase):
     
     
-    @patch("getinfo.get_repos")
+    @patch("Getinfo.get_repos")
     def test_Getrepo(self):
         fi = GitHubAPI("ImroseSingh")
         self.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
