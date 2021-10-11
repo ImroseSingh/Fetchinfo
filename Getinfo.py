@@ -10,7 +10,7 @@ class GitHubAPI:
         user.repos = []
         user.commits = {}
 
-    def get_repos(user):
+    def connect(user):
         try:
             r = requests.get(f'https://api.github.com/users/{user.id}/repos')
             
