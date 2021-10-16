@@ -10,7 +10,7 @@ import json
          self.repos = []
          self.commits = {}
 
-     def get_repos(self):
+     def get_repos(user):
          try:
              r = requests.get(f'https://api.github.com/users/{self.id}/repos')
 
@@ -20,7 +20,7 @@ import json
              self.repos.append(repo["name"])
          return self.repos
 
-     def get_commits(self):
+     def get_commits(user):
          for repo in self.repos:
              try:
                  r = requests.get(f'https://api.github.com/repos/{self.id}/{repo}/commits')
