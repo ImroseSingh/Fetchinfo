@@ -12,7 +12,7 @@ import json
 
      def get_repos(user):
          try:
-             r = requests.get(f'https://api.github.com/users/{self.id}/repos')
+             r = requests.get(f'https://api.github.com/users/{user.id}/repos')
 
          except requests.exceptions.HTTPError as error:
              return
@@ -23,7 +23,7 @@ import json
      def get_commits(user):
          for repo in user.repos:
              try:
-                 r = requests.get(f'https://api.github.com/repos/{self.id}/{repo}/commits')
+                 r = requests.get(f'https://api.github.com/repos/{user.id}/{repo}/commits')
              except requests.exceptions.HTTPError as error:
                  return
              user.commits[repo] = len(r.json())
