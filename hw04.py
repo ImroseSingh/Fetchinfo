@@ -6,7 +6,7 @@ from unittest.mock import patch
 from Getinfo import GitHubAPI
 
 class TestGitHubAPI(unittest.TestCase):
-
+    @patch('Getinfo.get_repos')
     def test_myrepo(requests_mock):
         fi = GitHubAPI("ImroseSingh")
         requests_mock.assertEqual(len(fi.get_repos()), 4,
