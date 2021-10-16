@@ -11,7 +11,7 @@ class TestGitHubAPI(unittest.TestCase):
         fi = GitHubAPI("ImroseSingh")
         requests_mock.assertEqual(len(fi.get_repos()), 4,
                          "There are 4 repositores")
-    @patch('Getinfo.get_commits)
+    @patch('Getinfo.get_commits')
     def test_Getrepo(requests_mock):
         fi = GitHubAPI("ImroseSingh")
         requests_mock.assertEqual(fi.get_repos(), ['Fetchinfo', 'ImroseSingh', 'ssw-567', 'triangle-HW2'], [
