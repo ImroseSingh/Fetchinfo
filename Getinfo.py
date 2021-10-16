@@ -1,12 +1,11 @@
 import requests
- import json
+import json
 
  class GitHubAPI:
 
      def __init__(self, id):
          self.id = id      
-         self.repo_status = 0
-         self.commit_status = 0
+        
 
          self.repos = []
          self.commits = {}
