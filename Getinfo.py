@@ -1,40 +1,39 @@
 import requests
-import json
+import sys
+import functools
 
-class GitHubAPI:
-    
-    def __init__(user, id):
-        user.id = id      
-        
+GITHUB_API = 'https://api.github.com'
 
-        user.repos = []
-        user.commits = {}
 
-    def get_repos(user):
-        try:
-            r = requests.get(f'https://api.github.com/users/{user.id}/repos')
-            
-        except requests.exceptions as error:
-            return
-        for repo in r.json():
-            user.repos.append(repo["name"])
-        return user.repos
+def get_repos(owner):
+    repos = []
+    try:
+        res = requests.get(f'{GITHUB_API}/users/{owner}/repos')
+        repos = [repo['name'] for repo in res.json()]
+    except Exception as e:
+        pass
+    return repos
 
-    def get_commits(user):
-        for repo in user.repos:
-            try:
-                r = requests.get(f'https://api.github.com/repos/{user.id}/{repo}/commits')
-            except requests.exceptions as error:
-                return
-            user.commits[repo] = len(r.json())
-        return user.commits
 
-    def print_data(user):
-        for repo in user.repos:
-            print(f'Repo: {repo} Number of commits: {user.commits[repo]}')
+def get_commits(owner, repo):
+    commits = 0
+    try:
+        res = requests.get(f'{GITHUB_API}/repos/{owner}/{repo}/stats/contributors')
+        commits = sum([contrib['total'] for contrib in res.json()])
+    except Exception as e:
+        pass
+    return commits
 
-   
 
-if __name__ == "__main__":
-    githubapi = GitHubAPI("ImroseSingh")
-   
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print('Usage: python hw04.py <Github username>')
+        sys.exit(1)
+
+    owner = sys.argv[1]
+
+    data = [(repo, get_commits(owner, repo)) for repo in get_repos(owner)]
+
+    # print results
+    for repo, commit_count in data:
+        print(f'{repo}: {commit_count}')
