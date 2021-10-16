@@ -1,39 +1,53 @@
 import requests
-import sys
-import functools
+ import json
 
-GITHUB_API = 'https://api.github.com'
+ class GitHubAPI:
 
+     def __init__(self, id):
+         self.id = id      
+         self.repo_status = 0
+         self.commit_status = 0
 
-def get_repos(owner):
-    repos = []
-    try:
-        res = requests.get(f'{GITHUB_API}/users/{owner}/repos')
-        repos = [repo['name'] for repo in res.json()]
-    except Exception as e:
-        pass
-    return repos
+         self.repos = []
+         self.commits = {}
 
+     def get_repos(self):
+         try:
+             r = requests.get(f'https://api.github.com/users/{self.id}/repos')
 
-def get_commits(owner, repo):
-    commits = 0
-    try:
-        res = requests.get(f'{GITHUB_API}/repos/{owner}/{repo}/stats/contributors')
-        commits = sum([contrib['total'] for contrib in res.json()])
-    except Exception as e:
-        pass
-    return commits
+         except requests.exceptions.HTTPError as error:
+             return
+         for repo in r.json():
+             self.repos.append(repo["name"])
+         return self.repos
 
+     def get_commits(self):
+         for repo in self.repos:
+             try:
+                 r = requests.get(f'https://api.github.com/repos/{self.id}/{repo}/commits')
+             except requests.exceptions.HTTPError as error:
+                 return
+             self.commits[repo] = len(r.json())
+         return self.commits
 
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: python hw04.py <Github username>')
-        sys.exit(1)
+     def print_data(self):
+         for repo in self.repos:
+             print(f'Repo: {repo} Number of commits: {self.commits[repo]}')
 
-    owner = sys.argv[1]
+     def run(self):
+         self.get_repos()
+         if self.repo_status != 200:
+             print(f'{self.repo_status} Error getting repos')
+             return self.repo_status
 
-    data = [(repo, get_commits(owner, repo)) for repo in get_repos(owner)]
+         self.get_commits()
+         if self.commit_status != 200:
+             print(f'{self.commit_status} Error getting commits')
+             return self.repo_status
 
-    # print results
-    for repo, commit_count in data:
-        print(f'{repo}: {commit_count}')
+         self.print_data()
+         return 200
+
+ if __name__ == "__main__":
+     githubapi = GitHubAPI("ImroseSingh")
+     githubapi.run()
