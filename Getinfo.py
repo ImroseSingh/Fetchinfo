@@ -3,12 +3,12 @@ import json
 
  class GitHubAPI:
 
-     def __init__(self, id):
-         self.id = id      
+     def __init__(user, id):
+         user.id = id      
         
 
-         self.repos = []
-         self.commits = {}
+         user.repos = []
+         user.commits = {}
 
      def get_repos(user):
          try:
@@ -17,17 +17,17 @@ import json
          except requests.exceptions.HTTPError as error:
              return
          for repo in r.json():
-             self.repos.append(repo["name"])
-         return self.repos
+             user.repos.append(repo["name"])
+         return user.repos
 
      def get_commits(user):
-         for repo in self.repos:
+         for repo in user.repos:
              try:
                  r = requests.get(f'https://api.github.com/repos/{self.id}/{repo}/commits')
              except requests.exceptions.HTTPError as error:
                  return
-             self.commits[repo] = len(r.json())
-         return self.commits
+             user.commits[repo] = len(r.json())
+         return user.commits
 
     
 
